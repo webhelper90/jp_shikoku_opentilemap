@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker pull juliennoblet/download-geofabrik:latest && docker run --rm -v $PWD:/data download-geofabrik:latest download --osm.pbf shikoku
+      run: docker pull juliennoblet/download-geofabrik:latest && docker run --rm -v $PWD:/data juliennoblet/download-geofabrik:latest download --osm.pbf shikoku
