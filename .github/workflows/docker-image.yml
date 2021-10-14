@@ -16,4 +16,4 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       #run: docker pull juliennoblet/download-geofabrik:v2.5.0 && docker run --rm -v $PWD:/data juliennoblet/download-geofabrik download --osm.pbf shikoku
-      run: wget https://github.com/julien-noblet/download-geofabrik/releases/download/v2.5.0/download-geofabrik_2.5.0_Linux_x86_64.tar.gz && tar vxfz download-geofabrik_2.5.0_Linux_x86_64.tar.gz && download-geofabrik download shikoku
+      run: wget https://github.com/julien-noblet/download-geofabrik/releases/download/v2.5.0/download-geofabrik_2.5.0_Linux_x86_64.tar.gz && tar vxfz download-geofabrik_2.5.0_Linux_x86_64.tar.gz && ls -l
