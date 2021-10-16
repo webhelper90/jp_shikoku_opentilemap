@@ -37,33 +37,3 @@ jobs:
         ../yq e -i '.services.postgres.volumes += ["./my-postgres.conf:/etc/postgresql/postgresql.conf"]' docker-compose.yml
         ../yq e -i '.services.postgres.command |= "postgres -c config_file=/etc/postgresql/postgresql.conf"' docker-compose.yml
         ./quickstart.sh $aria
-  job2:
-    runs-on: ubuntu-latest
-    steps:
-      - name: step2
-        uses: actions/checkout@v2
-        with:
-          name: tiles_7.mbtile
-          path: data/tiles.mbtiles
-          retention-days: 1
-      - env :
-          aria : chubu
-          MIN_ZOOM : 6
-          MAX_ZOOM : 7
-      - run: |
-          wget https://github.com/mikefarah/yq/releases/download/v4.13.4/yq_linux_386 -O yq
-          chmod +x yq
-          wget https://github.com/julien-noblet/download-geofabrik/releases/download/v2.5.0/download-geofabrik_2.5.0_Linux_x86_64.tar.gz
-          tar vxfz ./download-geofabrik_2.5.0_Linux_x86_64.tar.gz
-          ./download-geofabrik download $aria
-           git clone https://github.com/openmaptiles/openmaptiles.git -b v3.12.2
-           cd openmaptiles
-           mkdir -p data
-           cp ../$aria.osm.pbf ./data
-           sed -i -e "s/^MIN_ZOOM=.*/MIN_ZOOM=$MIN_ZOOM/" .env
-           sed -i -e "s/^MAX_ZOOM=.*/MAX_ZOOM=$MAX_ZOOM/" .env
-           cp ~/work/jp_shikoku_opentilemap/jp_shikoku_opentilemap/my-postgres.conf ./
-           cp ~/work/jp_shikoku_opentilemap/jp_shikoku_opentilemap/Makefile ./
-           ../yq e -i '.services.postgres.volumes += ["./my-postgres.conf:/etc/postgresql/postgresql.conf"]' docker-compose.yml
-           ../yq e -i '.services.postgres.command |= "postgres -c config_file=/etc/postgresql/postgresql.conf"' docker-compose.yml
-           ./quickstart.sh $aria
