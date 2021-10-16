@@ -16,7 +16,7 @@ jobs:
           name: tiles_0_5.mbtile
           path: data/tiles.mbtiles
           retention-days: 1
-        env :
+      - env :
           aria : chubu
           MIN_ZOOM : 0
           MAX_ZOOM : 5
@@ -46,7 +46,7 @@ jobs:
           name: tiles_7.mbtile
           path: data/tiles.mbtiles
           retention-days: 1
-        env :
+      - env :
           aria : chubu
           MIN_ZOOM : 6
           MAX_ZOOM : 7
