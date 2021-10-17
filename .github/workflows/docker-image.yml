@@ -34,3 +34,29 @@ jobs:
           ../yq e -i '.services.postgres.volumes += ["./my-postgres.conf:/etc/postgresql/postgresql.conf"]' docker-compose.yml
           ../yq e -i '.services.postgres.command |= "postgres -c config_file=/etc/postgresql/postgresql.conf"' docker-compose.yml
           ./quickstart.sh $aria
+      - name: Upload build1
+        uses: actions/upload-artifact@v2
+        with:
+          name: chubu_z0_5.mbtiles
+          path: openmaptiles/data/tiles.mbtiles
+      - name : build2
+        env :
+          aria : chubu
+          MIN_ZOOM : 6
+          MAX_ZOOM : 7
+        run: |
+          rm -Rf ./data
+          mkdir -p data
+          cp ../$aria.osm.pbf ./data
+          sed -i -e "s/^MIN_ZOOM=.*/MIN_ZOOM=$MIN_ZOOM/" .env
+          sed -i -e "s/^MAX_ZOOM=.*/MAX_ZOOM=$MAX_ZOOM/" .env
+          cp ~/work/jp_shikoku_opentilemap/jp_shikoku_opentilemap/my-postgres.conf ./
+          cp ~/work/jp_shikoku_opentilemap/jp_shikoku_opentilemap/Makefile ./
+          ../yq e -i '.services.postgres.volumes += ["./my-postgres.conf:/etc/postgresql/postgresql.conf"]' docker-compose.yml
+          ../yq e -i '.services.postgres.command |= "postgres -c config_file=/etc/postgresql/postgresql.conf"' docker-compose.yml
+          ./quickstart.sh $aria
+      - name: Upload build2
+        uses: actions/upload-artifact@v2
+        with:
+          name: chubu_z6_7.mbtiles
+          path: openmaptiles/data/tiles.mbtiles
