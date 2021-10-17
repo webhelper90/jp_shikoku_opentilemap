@@ -30,7 +30,7 @@ jobs:
           sed -i -e "s/^MIN_ZOOM=.*/MIN_ZOOM=$MIN_ZOOM/" .env
           sed -i -e "s/^MAX_ZOOM=.*/MAX_ZOOM=$MAX_ZOOM/" .env
           cp ~/work/jp_shikoku_opentilemap/jp_shikoku_opentilemap/my-postgres.conf ./
-          cp ~/work/jp_shikoku_opentilemap/jp_shikoku_opentilemap/Makefile ./
+          # cp ~/work/jp_shikoku_opentilemap/jp_shikoku_opentilemap/Makefile ./
           ../yq e -i '.services.postgres.volumes += ["./my-postgres.conf:/etc/postgresql/postgresql.conf"]' docker-compose.yml
           ../yq e -i '.services.postgres.command |= "postgres -c config_file=/etc/postgresql/postgresql.conf"' docker-compose.yml
           ./quickstart.sh $aria
@@ -63,7 +63,7 @@ jobs:
           sed -i -e "s/^MIN_ZOOM=.*/MIN_ZOOM=$MIN_ZOOM/" .env
           sed -i -e "s/^MAX_ZOOM=.*/MAX_ZOOM=$MAX_ZOOM/" .env
           cp ~/work/jp_shikoku_opentilemap/jp_shikoku_opentilemap/my-postgres.conf ./
-          cp ~/work/jp_shikoku_opentilemap/jp_shikoku_opentilemap/Makefile ./
+          # cp ~/work/jp_shikoku_opentilemap/jp_shikoku_opentilemap/Makefile ./
           ../yq e -i '.services.postgres.volumes += ["./my-postgres.conf:/etc/postgresql/postgresql.conf"]' docker-compose.yml
           ../yq e -i '.services.postgres.command |= "postgres -c config_file=/etc/postgresql/postgresql.conf"' docker-compose.yml
           ./quickstart.sh $aria
