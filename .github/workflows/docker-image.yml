@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  job1:
+  job_1:
     runs-on: ubuntu-latest
     steps:
       - name: step1
@@ -39,13 +39,25 @@ jobs:
         with:
           name: chubu_z0_5.mbtiles
           path: openmaptiles/data/tiles.mbtiles
-      - name : build2
+          
+  job_2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: step1
+        uses: actions/checkout@v2
+      - name : build1
         env :
           aria : chubu
           MIN_ZOOM : 6
           MAX_ZOOM : 7
         run: |
-          rm -Rf ./data
+          wget https://github.com/mikefarah/yq/releases/download/v4.13.4/yq_linux_386 -O yq
+          chmod +x yq
+          wget https://github.com/julien-noblet/download-geofabrik/releases/download/v2.5.0/download-geofabrik_2.5.0_Linux_x86_64.tar.gz
+          tar vxfz ./download-geofabrik_2.5.0_Linux_x86_64.tar.gz
+          ./download-geofabrik download $aria
+          git clone https://github.com/openmaptiles/openmaptiles.git -b v3.12.2
+          cd openmaptiles
           mkdir -p data
           cp ../$aria.osm.pbf ./data
           sed -i -e "s/^MIN_ZOOM=.*/MIN_ZOOM=$MIN_ZOOM/" .env
@@ -55,7 +67,7 @@ jobs:
           ../yq e -i '.services.postgres.volumes += ["./my-postgres.conf:/etc/postgresql/postgresql.conf"]' docker-compose.yml
           ../yq e -i '.services.postgres.command |= "postgres -c config_file=/etc/postgresql/postgresql.conf"' docker-compose.yml
           ./quickstart.sh $aria
-      - name: Upload build2
+      - name: Upload build1
         uses: actions/upload-artifact@v2
         with:
           name: chubu_z6_7.mbtiles
