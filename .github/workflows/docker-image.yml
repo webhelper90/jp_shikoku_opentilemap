@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     env :
       area : shikoku
-      MIN_ZOOM : 14
+      MIN_ZOOM : 1
       MAX_ZOOM : 15
     steps:
       - name: step1
