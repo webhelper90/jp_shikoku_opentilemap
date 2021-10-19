@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     env :
       area : shikoku
-      MIN_ZOOM : 0
-      MAX_ZOOM : 22
+      MIN_ZOOM : 9
+      MAX_ZOOM : 15
     steps:
       - name: step1
         uses: actions/checkout@v2
