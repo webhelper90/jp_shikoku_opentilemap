@@ -10,9 +10,9 @@ jobs:
   job_1:
     runs-on: ubuntu-latest
     env :
-      area : tohoku
-      MIN_ZOOM : 0
-      MAX_ZOOM : 14
+      area : shikoku
+      MIN_ZOOM : 14
+      MAX_ZOOM : 15
     steps:
       - name: step1
         uses: actions/checkout@v2
